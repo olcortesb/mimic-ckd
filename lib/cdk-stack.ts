@@ -19,7 +19,7 @@ export class mimicStack extends cdk.Stack {
       handler: "mimicListens.lambdaHandler",
       environment: {
         DYNAMO_DB_USE_LOCAL: "false",
-        DYNAMO_DB_REGION: "us-west-2",
+        DYNAMO_DB_REGION: "us-east-1",
         MIMIC_TABLE: table.tableName
       },
     });
@@ -30,7 +30,7 @@ export class mimicStack extends cdk.Stack {
       handler: "mimicResponse.lambdaHandler",
       environment: {
         DYNAMO_DB_USE_LOCAL: "false",
-        DYNAMO_DB_REGION: "us-west-2",
+        DYNAMO_DB_REGION: "us-east-1",
         MIMIC_TABLE: table.tableName
       },
     });
