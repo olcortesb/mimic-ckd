@@ -55,6 +55,7 @@ deploy-infra:
   - npm install -g aws-cdk@latest
   - cdk --version
   script:
+  - printenv
   - npx cdk synth
   - cdk diff
   - cdk deploy --require-approval never
