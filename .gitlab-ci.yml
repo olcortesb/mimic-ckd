@@ -8,8 +8,8 @@ stages:
   - git-clone-lambda-code
   - npm-install
   - build
-  - deploy-test
-  - deploy-prod
+  - deploy
+#  - deploy-prod
 
 git-clone-lambda-code:
   stage: git-clone-lambda-code
@@ -46,21 +46,8 @@ build-job:
   - npm run build
   - echo "Compile complete."
 
-deploy-dev-infra:
-  stage: deploy-test
-  variables:
-    CDK_DEPLOY_ACCOUNT: $DEV_ACCOUNT_ID
-    CDK_DEPLOY_REGION: $AWS_DEFAULT_REGION
-  before_script:
-  - npm install -g aws-cdk@latest
-  - cdk --version
-  script:
-  - npx cdk synth
-  - cdk diff
-  - cdk deploy --require-approval never
-
-deploy-prod-infra:
-  stage: deploy-prod
+deploy-infra:
+  stage: deploy
   variables:
     CDK_DEPLOY_ACCOUNT: $PROD_ACCOUNT_ID
     CDK_DEPLOY_REGION: $AWS_PROD_REGION
@@ -71,6 +58,19 @@ deploy-prod-infra:
   - npx cdk synth
   - cdk diff
   - cdk deploy --require-approval never
-  rules:
-  - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
-    when: manual
+
+# deploy-prod-infra:
+#   stage: deploy-prod
+#   variables:
+#     CDK_DEPLOY_ACCOUNT: $PROD_ACCOUNT_ID
+#     CDK_DEPLOY_REGION: $AWS_PROD_REGION
+#   before_script:
+#   - npm install -g aws-cdk@latest
+#   - cdk --version
+#   script:
+#   - npx cdk synth
+#   - cdk diff
+#   - cdk deploy --require-approval never
+#   rules:
+#   - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+#     when: manual
