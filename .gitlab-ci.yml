@@ -63,7 +63,7 @@ deploy-prod-infra:
   stage: deploy-prod
   variables:
     CDK_DEPLOY_ACCOUNT: $PROD_ACCOUNT_ID
-    CDK_DEPLOY_REGION: $AWS_DEFAULT_REGION
+    CDK_DEPLOY_REGION: $AWS_PROD_REGION
   before_script:
   - npm install -g aws-cdk@latest
   - cdk --version
