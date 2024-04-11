@@ -55,7 +55,7 @@ deploy-infra:
   - npm install -g aws-cdk@latest
   - cdk --version
   script:
-  - printenv
+  - cdk bootstrap aws://${PROD_ACCOUNT_ID}/${AWS_PROD_REGION}"
   - npx cdk synth
   - cdk diff
   - cdk deploy --require-approval never
