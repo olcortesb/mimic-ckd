@@ -41,7 +41,7 @@ npm-install:
 build-job:
   stage: build
   script:
-  - echo "Compiling the code..."
+  - echo "Compiling the code commitconf..."
   - npm install
   - npm run build
   - echo "Compile complete."
