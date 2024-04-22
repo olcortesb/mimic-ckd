@@ -5,11 +5,21 @@ cache:
   - node_modules/
 
 stages:
+  - sync-with-github
   - git-clone-lambda-code
   - npm-install
   - build
   - deploy
 #  - deploy-prod
+
+
+sync-with-github:
+  stage: sync-with-github
+  script:
+    - git remote add github https://$ACCESS_TOKEN@github.com/olcortesb/mimic-ckd.git
+    - git checkout main
+    - git status
+    - git push github main
 
 git-clone-lambda-code:
   stage: git-clone-lambda-code
@@ -41,7 +51,7 @@ npm-install:
 build-job:
   stage: build
   script:
-  - echo "Compiling the code commitconf..."
+  - echo "Compiling the code commitconf 2024..."
   - npm install
   - npm run build
   - echo "Compile complete."
