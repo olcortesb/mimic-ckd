@@ -15,6 +15,8 @@ stages:
 
 sync-with-github:
   stage: sync-with-github
+  before_script:
+    - apk add git
   script:
     - git remote add github https://$ACCESS_TOKEN@github.com/olcortesb/mimic-ckd.git
     - git checkout main
